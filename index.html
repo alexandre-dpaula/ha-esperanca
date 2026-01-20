@@ -296,16 +296,17 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 8px;
-        margin-top: var(--spacing-md);
+        gap: 12px;
+        margin-top: var(--spacing-lg);
+        padding: var(--spacing-md) 0;
         color: var(--color-text-light);
-        font-size: 0.9rem;
+        font-size: 0.95rem;
         font-weight: 500;
         opacity: 0.8;
         animation: swipeHintPulse 2s ease-in-out infinite;
       }
 
-      .swipe-hint i {
+      .swipe-hint svg {
         color: var(--color-accent);
       }
 
@@ -362,37 +363,6 @@
         position: relative;
         margin-top: var(--spacing-xl);
         overflow: visible;
-      }
-
-      /* Card Indicators */
-      .cards-indicators {
-        display: flex;
-        justify-content: center;
-        gap: 12px;
-        margin-top: var(--spacing-lg);
-        padding: var(--spacing-md) 0;
-      }
-
-      .indicator-dot {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background: rgba(26, 58, 46, 0.2);
-        cursor: pointer;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        border: 2px solid transparent;
-      }
-
-      .indicator-dot:hover {
-        background: rgba(26, 58, 46, 0.4);
-        transform: scale(1.2);
-      }
-
-      .indicator-dot.active {
-        background: var(--color-primary);
-        width: 32px;
-        border-radius: 6px;
-        border-color: var(--color-accent);
       }
 
       .cards-wrapper {
@@ -893,10 +863,6 @@
         <div class="section-header">
           <span class="section-tag">DESCUBRA</span>
           <h2 class="section-title">DEUS TRANSFORMA HISTÓRIAS</h2>
-          <div class="swipe-hint">
-            <i data-lucide="chevrons-right" width="20" height="20"></i>
-            <span>Arraste para o lado</span>
-          </div>
         </div>
 
         <div class="cards-scroll-container">
@@ -958,11 +924,10 @@
             </div>
           </div>
 
-          <!-- Card Indicators -->
-          <div class="cards-indicators">
-            <div class="indicator-dot active" data-index="0"></div>
-            <div class="indicator-dot" data-index="1"></div>
-            <div class="indicator-dot" data-index="2"></div>
+          <!-- Swipe Hint -->
+          <div class="swipe-hint">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevrons-right"><path d="m6 17 5-5-5-5"></path><path d="m13 17 5-5-5-5"></path></svg>
+            <span>Arraste para o lado</span>
           </div>
         </div>
       </div>
@@ -1169,43 +1134,7 @@
           }
         }, 100);
 
-        // Manual Carousel for Cards (no auto-scroll)
-        const cardsWrapper = document.querySelector(".cards-wrapper");
-        const indicators = document.querySelectorAll(".indicator-dot");
-
-        if (cardsWrapper && indicators.length > 0) {
-          let currentIndex = 0;
-          const cards = document.querySelectorAll(".netflix-card");
-
-          function updateIndicators() {
-            indicators.forEach((dot, index) => {
-              dot.classList.toggle("active", index === currentIndex);
-            });
-          }
-
-          function scrollToCard(index) {
-            currentIndex = index;
-            const cardWidth = cards[0].offsetWidth;
-            const gap = 24; // var(--spacing-md)
-            const scrollPosition = currentIndex * (cardWidth + gap);
-
-            // Animate scroll with GSAP for smoother effect
-            gsap.to(cardsWrapper, {
-              scrollLeft: scrollPosition,
-              duration: 0.8,
-              ease: "power2.inOut",
-            });
-
-            updateIndicators();
-          }
-
-          // Click on indicators for manual navigation
-          indicators.forEach((dot, index) => {
-            dot.addEventListener("click", () => {
-              scrollToCard(index);
-            });
-          });
-        }
+        // Cards are scrollable by touch/mouse drag - no additional JS needed
 
         // Scroll Reveal Animation
         const observerOptions = {
