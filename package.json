@@ -1,0 +1,22 @@
+{
+  "name": "ainda-ha-esperanca",
+  "version": "1.0.0",
+  "description": "Landing Page emocional para projeto evangelístico",
+  "scripts": {
+    "dev": "python3 -m http.server 8000",
+    "deploy": "vercel --prod",
+    "preview": "vercel"
+  },
+  "keywords": [
+    "landing-page",
+    "evangelismo",
+    "esperanca",
+    "biblia"
+  ],
+  "author": "Projeto Ainda Há Esperança",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SEU_USUARIO/ainda-ha-esperanca.git"
+  }
+}
