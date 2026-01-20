@@ -291,6 +291,42 @@
         margin: 0 auto;
       }
 
+      /* Swipe Hint */
+      .swipe-hint {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-top: var(--spacing-md);
+        color: var(--color-text-light);
+        font-size: 0.9rem;
+        font-weight: 500;
+        opacity: 0.8;
+        animation: swipeHintPulse 2s ease-in-out infinite;
+      }
+
+      .swipe-hint i {
+        color: var(--color-accent);
+      }
+
+      @keyframes swipeHintPulse {
+        0%, 100% {
+          opacity: 0.8;
+          transform: translateX(0);
+        }
+        50% {
+          opacity: 1;
+          transform: translateX(5px);
+        }
+      }
+
+      /* Hide swipe hint on desktop */
+      @media (min-width: 1024px) {
+        .swipe-hint {
+          display: none;
+        }
+      }
+
       /* Quote Section */
       .quote-section {
         background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
@@ -857,6 +893,10 @@
         <div class="section-header">
           <span class="section-tag">DESCUBRA</span>
           <h2 class="section-title">DEUS TRANSFORMA HISTÓRIAS</h2>
+          <div class="swipe-hint">
+            <i data-lucide="chevrons-right" width="20" height="20"></i>
+            <span>Arraste para o lado</span>
+          </div>
         </div>
 
         <div class="cards-scroll-container">
