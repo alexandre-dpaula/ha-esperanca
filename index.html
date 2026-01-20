@@ -1129,15 +1129,13 @@
           }
         }, 100);
 
-        // Auto Carousel for Cards
+        // Manual Carousel for Cards (no auto-scroll)
         const cardsWrapper = document.querySelector(".cards-wrapper");
         const indicators = document.querySelectorAll(".indicator-dot");
 
         if (cardsWrapper && indicators.length > 0) {
           let currentIndex = 0;
           const cards = document.querySelectorAll(".netflix-card");
-          const totalCards = cards.length;
-          let autoScrollInterval;
 
           function updateIndicators() {
             indicators.forEach((dot, index) => {
@@ -1161,36 +1159,12 @@
             updateIndicators();
           }
 
-          function autoScroll() {
-            currentIndex = (currentIndex + 1) % totalCards;
-            scrollToCard(currentIndex);
-          }
-
-          // Start auto scroll every 4 seconds
-          function startAutoScroll() {
-            autoScrollInterval = setInterval(autoScroll, 4000);
-          }
-
-          // Stop auto scroll
-          function stopAutoScroll() {
-            clearInterval(autoScrollInterval);
-          }
-
-          // Click on indicators
+          // Click on indicators for manual navigation
           indicators.forEach((dot, index) => {
             dot.addEventListener("click", () => {
-              stopAutoScroll();
               scrollToCard(index);
-              startAutoScroll();
             });
           });
-
-          // Initialize auto scroll
-          startAutoScroll();
-
-          // Pause on hover and restart on leave
-          cardsWrapper.addEventListener("mouseenter", stopAutoScroll);
-          cardsWrapper.addEventListener("mouseleave", startAutoScroll);
         }
 
         // Scroll Reveal Animation
